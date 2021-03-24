@@ -22,6 +22,7 @@
     <modules>
         <module>demo-main</module>
         <module>demo-netty</module>
+        <module>demo-jvm</module>
     </modules>
 
     <dependencies>
