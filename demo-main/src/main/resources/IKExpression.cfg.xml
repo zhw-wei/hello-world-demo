@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<function-configuration>
+    <!-- 系统函数默认配置 -->
+    <bean class="org.wltea.expression.function.SystemFunctions">
+        <function name="CONTAINS" method="contains">
+            <parameter-type>java.lang.String</parameter-type>
+            <parameter-type>java.lang.String</parameter-type>
+        </function>
+        <function name="STARTSWITH" method="startsWith">
+            <parameter-type>java.lang.String</parameter-type>
+            <parameter-type>java.lang.String</parameter-type>
+        </function>
+        <function name="ENDSWITH" method="endsWith">
+            <parameter-type>java.lang.String</parameter-type>
+            <parameter-type>java.lang.String</parameter-type>
+        </function>
+        <function name="CALCDATE" method="calcDate">
+            <parameter-type>java.util.Date</parameter-type>
+            <parameter-type>int</parameter-type>
+            <parameter-type>int</parameter-type>
+            <parameter-type>int</parameter-type>
+            <parameter-type>int</parameter-type>
+            <parameter-type>int</parameter-type>
+            <parameter-type>int</parameter-type>
+        </function>
+        <function name="SYSDATE" method="sysDate"/>
+        <function name="DAYEQUALS" method="dayEquals">
+            <parameter-type>java.util.Date</parameter-type>
+            <parameter-type>java.util.Date</parameter-type>
+        </function>
+    </bean>
+
+    <!-- 用户函数配置  请在这里定制您自己的函数-->
+    <bean class="com.hello.demo.IKExpression.ExpressionInfo">
+        <function name="NOW" method="now"></function>
+        <function name="YEAR" method="year">
+            <parameter-type>java.lang.String</parameter-type>
+        </function>
+        <function name="QUARTER" method="quarter">
+            <parameter-type>java.lang.String</parameter-type>
+        </function>
+        <function name="MONTH" method="month">
+            <parameter-type>java.lang.String</parameter-type>
+        </function>
+        <function name="DAY" method="day">
+            <parameter-type>java.lang.String</parameter-type>
+        </function>
+        <function name="DATEDIF" method="dateDif">
+            <parameter-type>java.lang.String</parameter-type>
+            <parameter-type>java.lang.String</parameter-type>
+            <parameter-type>java.lang.String</parameter-type>
+        </function>
+        <function name="DATEADD" method="dateAdd">
+            <parameter-type>java.lang.String</parameter-type>
+            <parameter-type>java.lang.Integer</parameter-type>
+            <parameter-type>java.lang.String</parameter-type>
+        </function>
+        <function name="DATE" method="date">
+            <parameter-type>java.lang.String</parameter-type>
+        </function>
+        <function name="DATESTR" method="date2Str">
+            <parameter-type>java.lang.Integer</parameter-type>
+            <parameter-type>java.lang.Integer</parameter-type>
+            <parameter-type>java.lang.Integer</parameter-type>
+        </function>
+        <function name="ABS" method="abs">
+            <parameter-type>java.lang.Double</parameter-type>
+        </function>
+        <function name="ROUND" method="round">
+            <parameter-type>java.lang.Double</parameter-type>
+            <parameter-type>java.lang.Integer</parameter-type>
+        </function>
+    </bean>
+</function-configuration>
