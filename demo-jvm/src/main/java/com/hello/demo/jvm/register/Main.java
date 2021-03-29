@@ -10,6 +10,8 @@ public class Main {
         main.test01();
 
         main.test04();
+        main.test08();
+        main.test09();
     }
 
     private void test01() {
@@ -77,5 +79,20 @@ public class Main {
         //第四类问题
         int i9 = 10;
         int i10 = i9++ + ++i9;//22
+    }
+
+    public void test08(){
+        int i10 = 10;
+        i10 = i10 + 1;
+
+        int i11 = 10;
+        i11 += i11;
+    }
+
+    public void test09(){
+        synchronized (Main.class) {
+            int i = 10;
+            i++;
+        }
     }
 }
