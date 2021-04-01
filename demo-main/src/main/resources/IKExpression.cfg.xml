@@ -64,10 +64,10 @@
             <parameter-type>java.lang.Integer</parameter-type>
         </function>
         <function name="ABS" method="abs">
-            <parameter-type>java.lang.Double</parameter-type>
+            <parameter-type>java.lang.Object</parameter-type>
         </function>
         <function name="ROUND" method="round">
-            <parameter-type>java.lang.Double</parameter-type>
+            <parameter-type>java.lang.Object</parameter-type>
             <parameter-type>java.lang.Integer</parameter-type>
         </function>
     </bean>

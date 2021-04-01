@@ -89,6 +89,8 @@ public class Main01 {
 
     public static void test18() {
         consumer.accept("$ABS(-123.440001)");
+        consumer.accept("$ABS(-123)");
+        consumer.accept("$ABS(-123/10)");
     }
 
     public static void test19() {
@@ -97,6 +99,8 @@ public class Main01 {
 
     public static void test20() {
         consumer.accept("$ROUND(\"-123.4455\", 2)");
+        consumer.accept("$ROUND(-123, 2)");
+        consumer.accept("$ROUND(-123/(10+1), 2)");
     }
 
     public static void test21() {

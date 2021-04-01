@@ -2,7 +2,9 @@ package com.hello.demo.IKExpression;
 
 public class Main {
     public static void main(String[] args) {
+        Main01.test18();
         Main01.test19();
+        Main01.test20();
     }
 
     private static void test01(){

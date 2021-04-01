@@ -143,8 +143,11 @@ public class ExpressionInfo {
     /**
      * 绝对值
      */
-    public static String abs(Double str){
-        BigDecimal decimal = new BigDecimal(str);
+    public static String abs(Object str){
+        String string = String.valueOf(str);
+        string = string.replaceAll("\\\"", "");
+        System.out.println(string);
+        BigDecimal decimal = new BigDecimal(string);
         decimal = decimal.abs();
         return decimal.setScale(10, RoundingMode.HALF_UP).stripTrailingZeros().toPlainString();
     }
@@ -152,8 +155,11 @@ public class ExpressionInfo {
     /**
      * 对小数点后的数四舍五入
      */
-    public static String round(Double str, Integer scale){
-        BigDecimal decimal = new BigDecimal(str).setScale(scale, RoundingMode.HALF_EVEN);
+    public static String round(Object str, Integer scale){
+        String string = String.valueOf(str);
+        string = string.replaceAll("\"", "");
+        System.out.println(string);
+        BigDecimal decimal = new BigDecimal(string).setScale(scale, RoundingMode.HALF_EVEN);
         return decimal.toPlainString();
     }
 }
