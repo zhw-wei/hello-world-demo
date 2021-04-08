@@ -4,10 +4,6 @@ package object testPackage{
   val test = "test"
 }
 
-package testPackage {
-
-  class Hello14 {
+class Hello14 {
 
   }
-
-}

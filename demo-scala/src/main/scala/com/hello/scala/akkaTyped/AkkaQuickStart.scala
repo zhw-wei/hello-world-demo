@@ -7,7 +7,7 @@ package com.hello.scala.akkaTyped
  */
 import akka.actor.typed.scaladsl.Behaviors
 import akka.actor.typed.{ActorRef, ActorSystem, Behavior}
-import com.hello.scala.akkaTyped.GreeterMain.SayHello
+import GreeterMain.SayHello
 
 object AkkaQuickStart extends App {
 
