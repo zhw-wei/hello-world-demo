@@ -7,6 +7,8 @@ import xyz.downgoon.snowflake.Snowflake;
 
 import java.net.Inet4Address;
 import java.net.UnknownHostException;
+import java.util.Objects;
+import java.util.Random;
 
 /**
  * @author: zhaohw
@@ -44,8 +46,11 @@ public class SnowFlakeUtil {
 
     private static Long getDataCenterId(){
         int[] ints = StringUtils.toCodePoints(SystemUtils.getHostName());
-        System.out.println(ints);
         int sums = 0;
+        if(Objects.isNull(ints)) {
+            sums = new Random().nextInt();
+            return (long)sums;
+        }
         for (int i: ints) {
             sums += i;
         }

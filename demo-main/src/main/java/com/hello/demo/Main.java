@@ -19,7 +19,10 @@ import java.util.stream.Stream;
 public class Main {
     public static void main(String[] args) throws Exception {
 
-        List<String> instIdList = new ArrayList<String>(){{
+        Thread.sleep(10000000);
+
+        System.out.println("hello world");
+        List<String> instIdList = new ArrayList<String>() {{
             add("1,2,3");
             add("4,5,6");
             add("7,8,9");
@@ -27,5 +30,6 @@ public class Main {
         List<Integer> equipmentInstIdList = instIdList.stream().flatMap(var0 -> Stream.of(var0.split(","))).map(var1 -> Integer.valueOf(var1))
                 .collect(Collectors.toList());
         System.out.println(equipmentInstIdList);
+
     }
 }

@@ -35,3 +35,5 @@ build/
 *.txt
 
 *.pdf
+
+.DS_Store
