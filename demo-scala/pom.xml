@@ -12,15 +12,11 @@
     <artifactId>demo-scala</artifactId>
 
     <properties>
-        <scala.version>2.13.1</scala.version>
-        <scala.base.version>2.13</scala.base.version>
-        <akka.version>2.6.8</akka.version>
+        <scala.version>2.12.13</scala.version>
     </properties>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.scala-lang/scala-library -->
-        <!--
-        说明：akka中已经依赖了scala library
         <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
@@ -31,26 +27,7 @@
             <artifactId>scala-reflect</artifactId>
             <version>${scala.version}</version>
         </dependency>
-        -->
-        <dependency>
-            <groupId>org.scala-lang.modules</groupId>
-            <artifactId>scala-parallel-collections_${scala.base.version}</artifactId>
-            <version>0.2.0</version>
-        </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.typesafe.akka/akka-actor-typed -->
-        <dependency>
-            <groupId>com.typesafe.akka</groupId>
-            <artifactId>akka-actor-typed_${scala.base.version}</artifactId>
-            <version>${akka.version}</version>
-        </dependency>
-
-        <!-- akka-actor-typed依赖logback-classic/slf4j-api日志打印 -->
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.2.3</version>
-        </dependency>
     </dependencies>
 
     <build>
