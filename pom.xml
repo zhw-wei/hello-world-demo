@@ -34,6 +34,14 @@
             <optional>true</optional>
             <version>1.18.8</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.7.1</version>
+<!--            <scope>test</scope>-->
+        </dependency>
+
     </dependencies>
 
 
