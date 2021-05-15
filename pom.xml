@@ -17,6 +17,9 @@
         <java.version>11</java.version>
         <project.encoding>UTF-8</project.encoding>
         <netty.version>4.1.56.Final</netty.version>
+        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+        <maven.assembly.plugin.version>3.3.0</maven.assembly.plugin.version>
+        <maven.scala.plugin.version>2.15.2</maven.scala.plugin.version>
     </properties>
 
     <modules>
