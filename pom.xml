@@ -25,6 +25,7 @@
         <module>demo-jvm</module>
         <module>demo-scala</module>
         <module>demo-javafx</module>
+        <module>demo-algorithms</module>
     </modules>
 
     <dependencies>
