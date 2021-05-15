@@ -41,9 +41,15 @@ public class StringTableTest {
         String s3 = "ab";
 
         /*
+        java8:
         查看字节码 -- 使用了StringBuilder
-
         s1 + s1的底层实现: s4 = new StringBuilder().append("a").append("b").toString()
+
+        java11:
+        查看字节码 -- 使用了本地方法 invokeDynamic<StringConcatFactory.makeConcatWithConstants>
+        根据调用的本地方法代码来看，实际上还是用到了StringBuilder
+
+        java8之后，字符串存储不再使用char[]，而是使用byte[]，因为一个char占两个byte，而常用的字符串大多是占用一个byte的字符，所以改用byte[]存储
         */
         String s4 = s1 + s2;
 
@@ -107,9 +113,9 @@ public class StringTableTest {
 
         long start = System.currentTimeMillis();
         for(int i=0; i<MAX_COUNT; i++){
-            //第二种方式在耗时和内存上更小
-            arr[i] = new String(String.valueOf(data[i%data.length]));
-//            arr[i] = new String(String.valueOf(data[i%data.length])).intern();
+            //第二种方式耗时较长，但是内存占用更小
+//            arr[i] = new String(String.valueOf(data[i%data.length]));
+            arr[i] = new String(String.valueOf(data[i%data.length])).intern();
         }
 
         long end = System.currentTimeMillis();
