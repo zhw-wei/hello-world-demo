@@ -46,7 +46,7 @@ public class SoftReferenceDemo {
 
         try{
             //让系统认为内存资源紧张
-            byte[] b = new byte[1024 * 1024 * 7];   //5m
+            byte[] b = new byte[1024 * 1024 * 7];   //7m
         }catch (Throwable th){
             th.printStackTrace();
         }finally {
