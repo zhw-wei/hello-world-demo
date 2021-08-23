@@ -29,40 +29,22 @@ public class ReferenceTest {
         test03();
     }
 
-    private static void test01() throws InterruptedException {
+    private static void test01() {
         ReferenceCache<String, User> cache = new WeakReferenceCache<>();
         cache.put("hello01", new User(1, "hello01"));
         cache.put("hello02", new User(2, "hello02"));
         cache.put("hello03", new User(3, "hello03"));
 
-        for (String key : cache.keySet()) {
-            System.out.println(cache.get(key));
-        }
-
-        System.out.println("GC ------");
-        System.gc();
-
-        for (String key : cache.keySet()) {
-            System.out.println(cache.get(key));
-        }
+        print(cache);
     }
 
-    private static void test02() throws InterruptedException {
+    private static void test02() {
         ReferenceCache<String, String> cache = new WeakReferenceCache<>();
         cache.put("hello01", "hello01");
         cache.put("hello02", "hello02");
         cache.put("hello03", "hello03");
 
-        for (String key : cache.keySet()) {
-            System.out.println(cache.get(key));
-        }
-
-        System.out.println("GC -----");
-        System.gc();
-
-        for (String key : cache.keySet()) {
-            System.out.println(cache.get(key));
-        }
+        print(cache);
     }
 
     private static void test03() throws InterruptedException {
@@ -71,6 +53,10 @@ public class ReferenceTest {
         cache.put("hello02", "hello002");
         cache.put("hello03", "hello003");
 
+        print(cache);
+    }
+
+    private static void print(ReferenceCache<String, ?> cache){
         for (String key : cache.keySet()) {
             System.out.println(cache.get(key));
         }
