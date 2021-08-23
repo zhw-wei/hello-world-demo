@@ -47,7 +47,7 @@ public class ReferenceTest {
         print(cache);
     }
 
-    private static void test03() throws InterruptedException {
+    private static void test03() {
         ReferenceCache<String, String> cache = new WeakReferenceCache<>();
         cache.put("hello01", "hello001");
         cache.put("hello02", "hello002");
@@ -56,7 +56,7 @@ public class ReferenceTest {
         print(cache);
     }
 
-    private static void print(ReferenceCache<String, ?> cache){
+    private static void print(ReferenceCache<String, ?> cache) {
         for (String key : cache.keySet()) {
             System.out.println(cache.get(key));
         }

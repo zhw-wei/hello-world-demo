@@ -14,7 +14,11 @@ import java.util.Set;
  */
 public class SoftReferenceCache<K, V> implements ReferenceCache<K, V> {
 
-    private final Map<K, SoftReference<V>> MAP = new HashMap<>();
+    private final Map<K, SoftReference<V>> MAP;
+
+    public SoftReferenceCache(){
+        this.MAP = new HashMap<>();
+    }
 
     @Override
     public V get(K key){
