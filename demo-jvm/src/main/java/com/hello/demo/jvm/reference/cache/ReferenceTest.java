@@ -57,15 +57,11 @@ public class ReferenceTest {
     }
 
     private static void print(ReferenceCache<String, ?> cache) {
-        for (String key : cache.keySet()) {
-            System.out.println(cache.get(key));
-        }
+        cache.forEach((key, value) -> System.out.println(value));
 
         System.out.println("GC -----");
         System.gc();
 
-        for (String key : cache.keySet()) {
-            System.out.println(cache.get(key));
-        }
+        cache.forEach((key, value) -> System.out.println(value));
     }
 }

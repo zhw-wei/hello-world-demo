@@ -2,6 +2,7 @@ package com.hello.demo.jvm.reference;
 
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 /**
@@ -27,5 +28,14 @@ public interface ReferenceCache<K, V> {
         if (Objects.isNull(value))
             value = supplier.get();
         return value;
+    }
+
+    default void forEach(BiConsumer<? super K, ? super V> con){
+        Objects.requireNonNull(con);
+
+        for (K key : this.keySet()) {
+            V value = this.get(key);
+            con.accept(key, value);
+        }
     }
 }
