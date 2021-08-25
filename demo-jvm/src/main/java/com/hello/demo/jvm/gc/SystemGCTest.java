@@ -1,6 +1,7 @@
 package com.hello.demo.jvm.gc;
 
 /**
+ * -XX:+PrintCommandLineFlags
  * @author zhw
  * @date 2021/8/17 10:38 下午
  */
