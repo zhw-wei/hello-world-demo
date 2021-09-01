@@ -2,10 +2,9 @@ package com.hello.demo.jvm.reference.cache;
 
 import com.hello.demo.jvm.reference.ReferenceCache;
 
+import java.lang.ref.Reference;
 import java.lang.ref.SoftReference;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 基于软引用定义缓存
@@ -22,7 +21,9 @@ public class SoftReferenceCache<K, V> implements ReferenceCache<K, V> {
 
     @Override
     public V get(K key){
-        return this.MAP.get(key).get();
+        Reference<V> reference = this.MAP.get(key);
+        if(Objects.isNull(reference)) return null;
+        return reference.get();
     }
 
     @Override

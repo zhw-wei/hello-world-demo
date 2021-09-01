@@ -2,9 +2,12 @@ package com.hello.demo.jvm.reference.cache;
 
 import com.hello.demo.jvm.reference.ReferenceCache;
 
+import java.lang.ref.Reference;
+import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -22,7 +25,9 @@ public class WeakReferenceCache<K, V> implements ReferenceCache<K, V> {
 
     @Override
     public V get(K key){
-        return this.MAP.get(key).get();
+        Reference<V> reference = this.MAP.get(key);
+        if(Objects.isNull(reference)) return null;
+        return reference.get();
     }
 
     @Override

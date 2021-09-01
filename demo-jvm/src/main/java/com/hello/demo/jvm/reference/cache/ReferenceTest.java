@@ -35,6 +35,8 @@ public class ReferenceTest {
         cache.put("hello02", new User(2, "hello02"));
         cache.put("hello03", new User(3, "hello03"));
 
+        System.out.println(cache.get("testError"));
+
         print(cache);
     }
 
