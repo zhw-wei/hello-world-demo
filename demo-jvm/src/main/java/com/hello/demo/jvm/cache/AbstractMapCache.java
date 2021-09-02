@@ -29,7 +29,7 @@ public abstract class AbstractMapCache<K, V> implements MapCache<K, V> {
         if (Objects.isNull(reference)) return null;
         Value<V> value = reference.get();
 
-        if (this.cacheInRule(value)) {
+        if (Objects.nonNull(value) && this.cacheInRule(value)) {
             return value.getValue();
         }else{
             VALUE_MAP.remove(key);
