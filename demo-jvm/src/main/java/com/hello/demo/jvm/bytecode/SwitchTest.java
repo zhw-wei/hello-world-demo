@@ -25,6 +25,18 @@ public class SwitchTest {
     }
 
     @Test
+    public void test011(){
+        String str = "hello";
+        int i = 0;
+        //比较的实际上hashCode
+        switch (str){
+            case "hello": i = 1; break;
+            case "world": i = 2; break;
+        }
+        System.out.println(str);
+    }
+
+    @Test
     public void test02(){
         int i=0;
         while(i < 100){

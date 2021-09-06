@@ -42,4 +42,10 @@ public class SynchronizedTest {
 
         System.out.println(i);
     }
+
+    @Test
+    public synchronized void test04(){
+        int i = 1;
+        System.out.println(i);
+    }
 }
