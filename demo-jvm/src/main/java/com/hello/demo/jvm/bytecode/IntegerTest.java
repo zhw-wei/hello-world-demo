@@ -5,6 +5,14 @@ package com.hello.demo.jvm.bytecode;
  * @date 2021/8/31 9:19 下午
  */
 public class IntegerTest {
+
+    private String hello;
+
+    public IntegerTest(){}
+    public IntegerTest(String hello) {
+        this.hello = hello;
+    }
+
     public static void main(String[] args) {
 
         Integer x = 5;
