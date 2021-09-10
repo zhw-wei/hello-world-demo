@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author: zhaohw
@@ -216,5 +218,71 @@ public class Hello01 {
         }
 
         return resultHead;
+    }
+
+    @Test
+    @DisplayName("数字反转")
+    public void test04(){
+        int x = -123;
+        Assertions.assertTrue(this.reverse(x) == -321);
+
+        x = -2147483648;
+        System.out.println(this.reverse(x));
+
+    }
+
+    public int reverse(int x) {
+        long y = x;
+        boolean negative = false;
+        if(y<0){
+            negative = true;
+            y = Math.abs(y);
+        }
+
+        //字符串反转
+        StringBuilder sb = new StringBuilder().append(y).reverse();
+        Long value = Long.valueOf(sb.toString()) * (negative ? -1 : 1);
+        if(Math.abs(value) > Integer.MAX_VALUE) return 0;
+        return value.intValue();
+    }
+
+    @Test
+    @DisplayName("字符串转换成一个 32 位有符号整数")
+    public void test05(){
+        Assertions.assertTrue(this.myAtoi("42") == 42);
+        Assertions.assertTrue(this.myAtoi("   -42") == -42);
+        Assertions.assertTrue(this.myAtoi("4193 with words") == 4193);
+        Assertions.assertTrue(this.myAtoi("-91283472332") == -2147483648);
+        Assertions.assertTrue(this.myAtoi("  0000000000012345678") == 12345678);
+        Assertions.assertTrue(this.myAtoi("00000-42a1234") == 0);
+    }
+
+    public int myAtoi(String str){
+        if(str.isEmpty()) return 0;
+
+        Pattern pattern = Pattern.compile("[-\\+]?\\d+");
+        Matcher matcher = pattern.matcher(str);
+
+        if(matcher.find()){
+            String firstMatch = matcher.group(0);
+            if(str.trim().indexOf(firstMatch) == 0){
+                boolean lessZero = firstMatch.charAt(0) == '-' ? true : false;
+
+                StringBuilder sb = new StringBuilder(firstMatch);
+                while(sb.charAt(0) == '+' || sb.charAt(0) == '-' || sb.charAt(0) == '0'){
+                    sb.deleteCharAt(0);
+                    if(sb.length() == 0) return 0;
+                }
+
+                String numberStr = sb.toString();
+                if(numberStr.length() > 12)
+                    return lessZero ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+                Long value = Long.valueOf(numberStr) * (lessZero ? -1 : 1);
+                if(value > Integer.MAX_VALUE) return Integer.MAX_VALUE;
+                if(value < Integer.MIN_VALUE) return Integer.MIN_VALUE;
+                return value.intValue();
+            }
+        }
+        return 0;
     }
 }
