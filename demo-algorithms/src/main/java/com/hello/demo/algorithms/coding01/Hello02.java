@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.*;
 import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -285,40 +287,54 @@ public class Hello02 {
     /**
      * 给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？
      * 请你找出所有和为 0 且不重复的三元组。
-     *
+     * <p>
      * 答案中不可以包含重复的三元组
      */
     @Test
     @DisplayName("和为0的不重复三元组")
     public void test08() {
-        int[] nums = {-1, 0, 1, 2, -1, -4};
+        int[] nums = {-2,0,3,-1,4,0,3,4,1,1,1,-3,-5,4,0};
 
         System.out.println(this.threeSum(nums));
     }
 
     public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> resultList = new ArrayList<>();
+        if (Objects.isNull(nums) || nums.length < 3) return resultList;
 
-        Set<Integer> set = new HashSet<>();
-        for (int num : nums) set.add(num);
-        if(set.size() < 3 || set.stream().allMatch(var0 -> var0>=0)
-            || set.stream().allMatch(var1 -> var1 <= 0)) return new ArrayList<>();
+        Arrays.sort(nums);
 
-        int total = 0;
-        List<List<Integer>> result = new ArrayList<>();
-        for (Integer num : set) {
-            int next = total - num;
-            for (Integer num2 : set) {
-                int num3 = next - num2;
+        for (int firstIndex = 0; firstIndex < nums.length - 2; firstIndex++) {
+            int first = nums[firstIndex];
+            if (first > 0) break;
+            if (firstIndex > 0 && first == nums[firstIndex - 1]) continue;
 
-                if(set.contains(num3) && !num.equals(num2)
-                        && !num.equals(num3) && !num2.equals(num3)) {
-                    List<Integer> list = Arrays.asList(num, num2, num3);
-                    if(result.stream().noneMatch(var0 -> var0.containsAll(list)))
-                        result.add(list);
+            //左右连段的指针，同时向中间移动
+            int secondIndex = firstIndex + 1;
+            int thirdIndex = nums.length - 1;
+
+            while (thirdIndex > secondIndex) {
+                int second = nums[secondIndex];
+                int third = nums[thirdIndex];
+
+                int total = first + second + third;
+                if (total == 0) {
+                    resultList.add(Arrays.asList(first, second, third));
+                    //指针移动
+                    secondIndex++;
+                    thirdIndex--;
+
+                    //判断是否是重复值
+                    while (secondIndex < thirdIndex && nums[secondIndex] == nums[secondIndex - 1]) secondIndex++;
+                    while (secondIndex < thirdIndex && nums[thirdIndex] == nums[thirdIndex + 1]) thirdIndex--;
+                } else if (total > 0) {
+                    thirdIndex--;
+                } else {
+                    secondIndex++;
                 }
             }
         }
 
-        return result;
+        return resultList;
     }
 }
