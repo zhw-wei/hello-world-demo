@@ -179,4 +179,70 @@ public class Hello03 {
         if (list.isEmpty()) return null;
         return list.get(0);
     }
+
+    /**
+     * 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s ，判断字符串是否有效。
+     * <p>
+     * 有效字符串需满足：
+     * <p>
+     * 左括号必须用相同类型的右括号闭合。
+     * 左括号必须以正确的顺序闭合。
+     * <p>
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/valid-parentheses
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     */
+    @DisplayName("")
+    @Test
+    public void test04() {
+        Assertions.assertTrue(this.isValid("{}"));
+        Assertions.assertTrue(this.isValid("()[]{}"));
+        Assertions.assertFalse(this.isValid("(]"));
+        Assertions.assertFalse(this.isValid("([)]"));
+        Assertions.assertTrue(this.isValid("{[]}"));
+
+
+        Assertions.assertTrue(this.isValid2("{}"));
+        Assertions.assertTrue(this.isValid2("()[]{}"));
+        Assertions.assertFalse(this.isValid2("(]"));
+        Assertions.assertFalse(this.isValid2("([)]"));
+        Assertions.assertTrue(this.isValid2("{[]}"));
+
+    }
+
+    public boolean isValid(String s) {
+        String[] strs = {"()", "{}", "[]"};
+
+        while (s.contains(strs[0]) || s.contains(strs[1]) || s.contains(strs[2])) {
+            s = s.replace(strs[0], "");
+            s = s.replace(strs[1], "");
+            s = s.replace(strs[2], "");
+        }
+        return s.isEmpty();
+    }
+
+    // TODO: 2021.09.27  
+    public boolean isValid2(String s) {
+        Deque<Character> dequeue = new LinkedList<>();
+        Map<Character, Character> map0 = new HashMap<>() {{
+            put(')', '(');
+            put('}', '{');
+            put(']', '[');
+        }};
+
+        for (int i = 0; i < s.length(); i++) {
+
+            char char0 = s.charAt(i);
+
+            if (char0 == '(' || char0 == '{' || char0 == '[') {
+                dequeue.add(char0);
+            } else if (char0 == '}' || char0 == ']' || char0 == ')') {
+                if (dequeue.isEmpty()) return false;
+
+                if (map0.get(char0).charValue() == dequeue.peek().charValue()) dequeue.remove();
+                else return false;
+            }
+        }
+        return dequeue.isEmpty();
+    }
 }
