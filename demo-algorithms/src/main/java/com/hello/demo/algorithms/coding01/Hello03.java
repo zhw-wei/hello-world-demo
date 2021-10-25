@@ -1,5 +1,6 @@
 package com.hello.demo.algorithms.coding01;
 
+import com.hello.demo.algorithms.dto.ListNode;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -143,24 +144,6 @@ public class Hello03 {
         }
     }
 
-    //约定：单向链表
-    public class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode() {
-        }
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
-    }
-
     public ListNode removeNthFromEnd(ListNode head, int n) {
         List<ListNode> list = new ArrayList<>();
         list.add(head);
@@ -201,7 +184,6 @@ public class Hello03 {
         Assertions.assertFalse(this.isValid("([)]"));
         Assertions.assertTrue(this.isValid("{[]}"));
 
-
         Assertions.assertTrue(this.isValid2("{}"));
         Assertions.assertTrue(this.isValid2("()[]{}"));
         Assertions.assertFalse(this.isValid2("(]"));
@@ -223,7 +205,7 @@ public class Hello03 {
 
     // TODO: 2021.09.27  
     public boolean isValid2(String s) {
-        Deque<Character> dequeue = new LinkedList<>();
+        Deque<Character> stack = new LinkedList<>();
         Map<Character, Character> map0 = new HashMap<>() {{
             put(')', '(');
             put('}', '{');
@@ -235,14 +217,14 @@ public class Hello03 {
             char char0 = s.charAt(i);
 
             if (char0 == '(' || char0 == '{' || char0 == '[') {
-                dequeue.add(char0);
+                stack.push(char0);
             } else if (char0 == '}' || char0 == ']' || char0 == ')') {
-                if (dequeue.isEmpty()) return false;
+                if (stack.isEmpty()) return false;
 
-                if (map0.get(char0).charValue() == dequeue.peek().charValue()) dequeue.remove();
+                if (map0.get(char0).charValue() == stack.peek().charValue()) stack.remove();
                 else return false;
             }
         }
-        return dequeue.isEmpty();
+        return stack.isEmpty();
     }
 }
