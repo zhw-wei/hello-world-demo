@@ -223,13 +223,10 @@ public class Hello04 {
 
     /**
      * 给你一个链表，每 k 个节点一组进行翻转，请你返回翻转后的链表。
-     * <p>
      * k 是一个正整数，它的值小于或等于链表的长度。
-     * <p>
      * 如果节点总数不是 k 的整数倍，那么请将最后剩余的节点保持原有顺序。
      * <p>
      * 进阶：
-     * <p>
      * 你可以设计一个只使用常数额外空间的算法来解决此问题吗？
      * 你不能只是单纯的改变节点内部的值，而是需要实际进行节点交换。
      * <p>
@@ -243,58 +240,52 @@ public class Hello04 {
         //输入：head = [1,2,3,4,5], k = 2
         //输出：[2,1,4,3,5]
         ListNode node = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5)))));
-        Assertions.assertTrue(ListNode.listNode2String.apply(this.reverseKGroup(node, 2)).equals("2,1,4,3,5"));
+//        Assertions.assertTrue(ListNode.listNode2String.apply(this.reverseKGroup(node, 2)).equals("2,1,4,3,5"));
         //k = 3
         //输出：[3,2,1,4,5]
-        Assertions.assertTrue(ListNode.listNode2String.apply(this.reverseKGroup(node, 3)).equals("3,2,1,4,5"));
+//        Assertions.assertTrue(ListNode.listNode2String.apply(this.reverseKGroup(node, 3)).equals("3,2,1,4,5"));
+        //k = 4
+        //输出：[4,3,2,1,5]
+        Assertions.assertTrue(ListNode.listNode2String.apply(this.reverseKGroup(node, 4)).equals("4,3,2,1,5"));
     }
 
     public ListNode reverseKGroup(ListNode head, int k) {
+        ListNode hair = new ListNode(0);
+        hair.next = head;
+        ListNode pre = hair;
 
-        ListNode baseHead = new ListNode(0, head);
-        ListNode node = baseHead;
-        //node0 -x- node1 <=other node=> node2 -x- node3
-        while (true) {
-
-            ListNode node0 = node;
-            ListNode node1 = node.next;
-
-            if (Objects.isNull(node1) || Objects.isNull(node1.next)) break;
-
-            if (k > 2) {
-                ListNode otherNodeStart = node1.next;
-                ListNode otherNodeEnd = null;
-
-                for (int i = 1; i < k; i++) {
-                    node = node.next;
-                    if (i == k - 1) otherNodeEnd = node;
+        while (head != null) {
+            ListNode tail = pre;
+            // 查看剩余部分长度是否大于等于 k
+            for (int i = 0; i < k; ++i) {
+                tail = tail.next;
+                if (tail == null) {
+                    return hair.next;
                 }
-
-                if (Objects.isNull(otherNodeEnd) || Objects.isNull(otherNodeEnd.next)) break;
-
-                ListNode node2 = otherNodeEnd.next;
-                ListNode node3 = node2.next;
-
-                node0.next = node2;
-                node2.next = otherNodeStart;
-                otherNodeEnd.next = node1;
-                node1.next = node3;
-
-                node = otherNodeEnd.next;
-            } else {
-                ListNode node2 = node1.next;
-                ListNode node3 = node2.next;
-
-                node0.next = node2;
-                node2.next = node1;
-                node1.next = node3;
-
-                node = node1;
             }
-
-            if (Objects.isNull(node.next)) break;
+            ListNode nex = tail.next;
+            ListNode[] reverse = myReverse(head, tail);
+            head = reverse[0];
+            tail = reverse[1];
+            // 把子链表重新接回原链表
+            pre.next = head;
+            tail.next = nex;
+            pre = tail;
+            head = tail.next;
         }
 
-        return baseHead.next;
+        return hair.next;
+    }
+
+    public ListNode[] myReverse(ListNode head, ListNode tail) {
+        ListNode prev = tail.next;
+        ListNode p = head;
+        while (prev != tail) {
+            ListNode nex = p.next;
+            p.next = prev;
+            prev = p;
+            p = nex;
+        }
+        return new ListNode[]{tail, head};
     }
 }
