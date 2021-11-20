@@ -9,7 +9,6 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.hello.demo.javafx</groupId>
     <artifactId>demo-javafx</artifactId>
 
     <properties>
