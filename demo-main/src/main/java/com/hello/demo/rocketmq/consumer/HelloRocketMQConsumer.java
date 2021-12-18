@@ -1,5 +1,6 @@
 package com.hello.demo.rocketmq.consumer;
 
+import com.hello.demo.rocketmq.MQConfig;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
@@ -15,25 +16,30 @@ import org.apache.rocketmq.common.protocol.heartbeat.MessageModel;
 public class HelloRocketMQConsumer {
     public static void main(String[] args) throws MQClientException {
 
-        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer();
-        consumer.setConsumerGroup("hello_group_01");
+        //消费组
+        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("consumer_group_01");
 
         //注册中心
-        consumer.setNamesrvAddr("192.168.88.130:9876");
-        //队列地址
-        consumer.subscribe("topic_hello_01", "*");
+        consumer.setNamesrvAddr(MQConfig.MQ_PATH);
+
+        //topic：主题地址，subExpression: tag过滤
+        consumer.subscribe(MQConfig.MQ_TOPIC, "*");
 
         //消费方式
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
         consumer.setMessageModel(MessageModel.BROADCASTING);
 
         //设置消费方式
+        //msgList是list类型，说明可以一次性接收多个消息，默认32个
         consumer.registerMessageListener((MessageListenerConcurrently) (msgList, context) -> {
 
             for (MessageExt message : msgList) {
                 String msgId = message.getMsgId();
-//                byte[] body = message.getBody();
-                System.out.println("接收到消息，msgId: " + msgId);
+
+                byte[] body = message.getBody();
+                String result = new String(body);
+
+                System.out.println("接收到消息，msgId: " + msgId + ", result: " + result);
             }
 
             return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
@@ -42,6 +48,5 @@ public class HelloRocketMQConsumer {
         System.out.println("连接开始。。。。。。");
         consumer.start();
         System.out.println("连接成功。。。。。。");
-
     }
 }
