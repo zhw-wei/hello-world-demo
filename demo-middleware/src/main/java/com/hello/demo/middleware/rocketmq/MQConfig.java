@@ -1,4 +1,4 @@
-package com.hello.demo.rocketmq;
+package com.hello.demo.middleware.rocketmq;
 
 /**
  * @author zhw

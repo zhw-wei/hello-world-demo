@@ -30,6 +30,7 @@
         <module>demo-javafx</module>
         <module>demo-algorithms</module>
         <module>demo-spark</module>
+        <module>demo-middleware</module>
     </modules>
 
     <dependencies>
