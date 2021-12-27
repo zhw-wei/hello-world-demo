@@ -1,5 +1,6 @@
 package com.hello.demo.middleware.rocketmq.producer;
 
+import com.hello.demo.middleware.Config;
 import com.hello.demo.middleware.rocketmq.MQConfig;
 import org.apache.rocketmq.client.exception.MQBrokerException;
 import org.apache.rocketmq.client.exception.MQClientException;
@@ -30,6 +31,7 @@ public class HelloRocketMQProducer {
                 "Keys", //消息的唯一值
                 "hello world".getBytes());
 
+        Config.sleep();
         //同步发送
         SendResult send = producer.send(msg);
         System.out.println(send);

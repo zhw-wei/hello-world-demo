@@ -1,5 +1,6 @@
 package com.hello.demo.middleware.zookeeper;
 
+import com.hello.demo.middleware.Config;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.ZooDefs;
@@ -23,7 +24,7 @@ public class ZKClient01 {
     //建立连接
     @BeforeEach
     public void before() throws IOException {
-        this.zkCli = new ZooKeeper(ZKConfig.ZK_PATH, 2000,
+        this.zkCli = new ZooKeeper(ZKConfig.ZK_PATH, 3000,
                 //zookeeper把数据变化或路径变化，发送给此listener线程
                 event -> {
                     System.out.println("------start-----");
@@ -64,6 +65,9 @@ public class ZKClient01 {
     @Test
     @DisplayName("判断节点是否存在")
     public void checkNodeExists() throws InterruptedException, KeeperException {
+
+        Config.sleep(10);
+
         Stat exists = this.zkCli.exists("/ZNode01", false);
         System.out.println(exists);
         Assertions.assertTrue(Objects.nonNull(exists));
