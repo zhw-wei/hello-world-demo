@@ -1,6 +1,6 @@
-package com.hello.demo.io.nio;
+package com.hello.netty.io.nio;
 
-import com.hello.demo.io.Config;
+import com.hello.netty.io.Config;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
