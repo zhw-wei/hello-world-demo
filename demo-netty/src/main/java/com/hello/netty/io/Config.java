@@ -1,4 +1,4 @@
-package com.hello.demo.io;
+package com.hello.netty.io;
 
 public interface Config {
 

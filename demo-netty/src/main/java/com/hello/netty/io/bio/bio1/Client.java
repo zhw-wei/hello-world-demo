@@ -1,4 +1,4 @@
-package com.hello.demo.io.bio.bio1;
+package com.hello.netty.io.bio.bio1;
 
 import java.io.IOException;
 import java.io.OutputStream;

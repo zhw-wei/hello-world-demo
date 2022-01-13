@@ -1,4 +1,4 @@
-package com.hello.demo.io.bio.bio5;
+package com.hello.netty.io.bio.bio5;
 
 import java.io.BufferedReader;
 import java.io.IOException;

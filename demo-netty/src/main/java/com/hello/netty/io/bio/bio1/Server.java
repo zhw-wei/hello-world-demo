@@ -1,6 +1,9 @@
-package com.hello.demo.io.bio.bio1;
+package com.hello.netty.io.bio.bio1;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 

@@ -1,4 +1,4 @@
-package com.hello.demo.io.nio;
+package com.hello.netty.io.nio;
 
 import java.io.FileInputStream;
 import java.io.IOException;

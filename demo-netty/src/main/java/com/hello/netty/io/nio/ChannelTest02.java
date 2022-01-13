@@ -1,6 +1,8 @@
-package com.hello.demo.io.nio;
+package com.hello.netty.io.nio;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
