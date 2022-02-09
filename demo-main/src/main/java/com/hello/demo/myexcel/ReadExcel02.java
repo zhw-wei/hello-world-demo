@@ -13,6 +13,7 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 import java.beans.PropertyDescriptor;
 import java.io.File;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.function.Function;
@@ -23,6 +24,9 @@ import java.util.stream.Collectors;
  * @date: 2022.02.09 下午 2:49
  */
 public class ReadExcel02 {
+    static int ATTR_START = 201;
+    static int ATTR_END = 227;
+
     public static void main(String[] args) throws Exception {
         List<ContractExcelInfo> contractList = read_total();
         System.out.println("原始值： " + contractList);
@@ -34,8 +38,8 @@ public class ReadExcel02 {
 
         for (ContractExcelInfo info : contractList) {
             UserInfo userInfo = userMap.getOrDefault(info.getVal0(), new UserInfo());
-            info.setVal20(userInfo.getUserTypeName());
-            info.setVal21(userInfo.getUserTypeName2());
+            info.setVal100(userInfo.getUserTypeName());
+            info.setVal101(userInfo.getUserTypeName2());
         }
 
         List<ContractExcelInfo> attrList = read_attr_info();
@@ -45,13 +49,27 @@ public class ReadExcel02 {
 
         for (ContractExcelInfo info : contractList) {
             ContractExcelInfo attrInfo = attrMap.get(info.getVal0());
-            if(Objects.nonNull(attrInfo)) {
+            if (Objects.nonNull(attrInfo)) {
                 //22~39
-                for (int i = 22; i <= 39; i++) {
+                for (int i = ATTR_START; i <= ATTR_END; i++) {
                     String param = String.format("val%s", i);
                     PropertyDescriptor descriptor = new PropertyDescriptor(param, ContractExcelInfo.class);
                     String value = String.valueOf(descriptor.getReadMethod().invoke(attrInfo));
                     descriptor.getWriteMethod().invoke(info, value);
+                }
+            }
+        }
+
+        for (Field field : ContractExcelInfo.class.getDeclaredFields()) {
+            String fieldName = field.getName();
+            PropertyDescriptor descriptor = new PropertyDescriptor(fieldName, ContractExcelInfo.class);
+            Method readMethod = descriptor.getReadMethod();
+            Method writeMethod = descriptor.getWriteMethod();
+
+            for (ContractExcelInfo info : contractList) {
+                String value = String.valueOf(readMethod.invoke(info));
+                if(Objects.isNull(value) || "null".equalsIgnoreCase(value)){
+                    writeMethod.invoke(info, "");
                 }
             }
         }
@@ -69,7 +87,7 @@ public class ReadExcel02 {
         createExcel.createExcel().write(file);
     }
 
-    private static List<ContractExcelInfo> read_total() throws Exception{
+    private static List<ContractExcelInfo> read_total() throws Exception {
         String path = "D:/document/2022-02/0209_05_2.xlsx";
         Workbook workbook = WorkbookFactory.create(new File(path));
 
@@ -81,7 +99,7 @@ public class ReadExcel02 {
             ContractExcelInfo excelInfo = new ContractExcelInfo();
 
             String param = "val%s";
-            for(int j=0; j<= 19; j++){
+            for (int j = 0; j <= 19; j++) {
                 String totalParam = String.format(param, j);
                 String value = ExcelUtil.readAsString(j, row);
 
@@ -147,7 +165,7 @@ public class ReadExcel02 {
     private static List<ContractExcelInfo> read_attr_info() throws Exception {
 
         Map<String, Method> methodMap = new HashMap<>();
-        for(int i=22; i<=39; i++){
+        for (int i = ATTR_START; i <= ATTR_END; i++) {
             String param = String.format("val%s", i);
             PropertyDescriptor descriptor = new PropertyDescriptor(param, ContractExcelInfo.class);
             Method writeMethod = descriptor.getWriteMethod();
@@ -172,8 +190,8 @@ public class ReadExcel02 {
 
             ContractExcelInfo info = attrMap.getOrDefault(cttId, new ContractExcelInfo());
             info.setVal0(cttId);
-            if(methodMap.containsKey(attrName)){
-                methodMap.get(attrName).invoke(info, "NULL".equalsIgnoreCase(attrSelectValue) ? attrValue:attrSelectValue);
+            if (methodMap.containsKey(attrName)) {
+                methodMap.get(attrName).invoke(info, "NULL".equalsIgnoreCase(attrSelectValue) ? attrValue : attrSelectValue);
             }
             attrMap.put(cttId, info);
         }
@@ -242,47 +260,67 @@ public class ReadExcel02 {
         private String val18;
         @ExcelInfo(headerName = "审批完成时间")
         private String val19;
+        @ExcelInfo(headerName = "合同金额")
+        private String val20;
 
         @ExcelInfo(headerName = "甲方")
-        private String val20;
+        private String val100;
         @ExcelInfo(headerName = "乙方")
-        private String val21;
+        private String val101;
 
         @ExcelInfo(headerName = "增值-签约选项")
-        private String val22;
+        private String val201;
         @ExcelInfo(headerName = "增值-业务类型")
-        private String val23;
+        private String val202;
         @ExcelInfo(headerName = "增值-是否关联交易方")
-        private String val24;
+        private String val203;
         @ExcelInfo(headerName = "增值-付款方式")
-        private String val25;
+        private String val204;
         @ExcelInfo(headerName = "增值-是否合同范本")
-        private String val26;
+        private String val205;
         @ExcelInfo(headerName = "增值-是否已提示付款")
-        private String val27;
+        private String val206;
         @ExcelInfo(headerName = "增值-合同状态")
-        private String val28;
+        private String val207;
         @ExcelInfo(headerName = "增值-合同类型")
-        private String val29;
+        private String val208;
         @ExcelInfo(headerName = "增值-所属条线")
-        private String val30;
+        private String val209;
         @ExcelInfo(headerName = "增值-履约保证金")
-        private String val31;
+        private String val210;
         @ExcelInfo(headerName = "增值-合同金额")
-        private String val32;
+        private String val211;
         @ExcelInfo(headerName = "增值-合同期限（月）")
-        private String val33;
+        private String val212;
         @ExcelInfo(headerName = "增值-月租金/月合同额（元）")
-        private String val34;
+        private String val213;
         @ExcelInfo(headerName = "增值-城市")
-        private String val35;
+        private String val214;
         @ExcelInfo(headerName = "增值-合作单位公司名称")
-        private String val36;
+        private String val215;
         @ExcelInfo(headerName = "增值-项目名称")
-        private String val37;
+        private String val216;
         @ExcelInfo(headerName = "增值-合同简要信息")
-        private String val38;
+        private String val217;
         @ExcelInfo(headerName = "增值-本合同金额")
-        private String val39;
+        private String val218;
+        @ExcelInfo(headerName = "增值-公司地址")
+        private String val219;
+        @ExcelInfo(headerName = "增值-使用途径")
+        private String val220;
+        @ExcelInfo(headerName = "增值-物业资源编号")
+        private String val221;
+        @ExcelInfo(headerName = "城市")
+        private String val222;
+        @ExcelInfo(headerName = "递增值")
+        private String val223;
+        @ExcelInfo(headerName = "合同金额（元）")
+        private String val224;
+        @ExcelInfo(headerName = "合同期限（月）")
+        private String val225;
+        @ExcelInfo(headerName = "合同文本")
+        private String val226;
+        @ExcelInfo(headerName = "是否框架合同")
+        private String val227;
     }
 }
