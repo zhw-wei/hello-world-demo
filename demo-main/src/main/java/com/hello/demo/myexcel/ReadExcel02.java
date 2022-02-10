@@ -24,6 +24,9 @@ import java.util.stream.Collectors;
  * @date: 2022.02.09 下午 2:49
  */
 public class ReadExcel02 {
+    static int TOTAL_START = 0;
+    static int TOTAL_END = 22;
+
     static int ATTR_START = 201;
     static int ATTR_END = 227;
 
@@ -88,7 +91,7 @@ public class ReadExcel02 {
     }
 
     private static List<ContractExcelInfo> read_total() throws Exception {
-        String path = "D:/document/2022-02/0209_05_2.xlsx";
+        String path = "D:/document/2022-02/合同信息01/0210_01_2.xlsx";
         Workbook workbook = WorkbookFactory.create(new File(path));
 
         Sheet sheet = workbook.getSheetAt(0);
@@ -99,7 +102,7 @@ public class ReadExcel02 {
             ContractExcelInfo excelInfo = new ContractExcelInfo();
 
             String param = "val%s";
-            for (int j = 0; j <= 19; j++) {
+            for (int j = TOTAL_START; j <= TOTAL_END; j++) {
                 String totalParam = String.format(param, j);
                 String value = ExcelUtil.readAsString(j, row);
 
@@ -119,7 +122,7 @@ public class ReadExcel02 {
 
 
     private static List<UserInfo> read_write_user() throws Exception {
-        String path = "D:/document/2022-02/0209_02_2.xlsx";
+        String path = "D:/document/2022-02/合同信息01/0210_02_2.xlsx";
         Workbook workbook = WorkbookFactory.create(new File(path));
 
         Sheet sheet = workbook.getSheetAt(0);
@@ -174,7 +177,7 @@ public class ReadExcel02 {
             methodMap.put(headerName, writeMethod);
         }
 
-        String path = "D:/document/2022-02/0209_04_2.xlsx";
+        String path = "D:/document/2022-02/合同信息01/0210_04_2.xlsx";
         Workbook workbook = WorkbookFactory.create(new File(path));
 
         Sheet sheet = workbook.getSheetAt(0);
@@ -262,6 +265,10 @@ public class ReadExcel02 {
         private String val19;
         @ExcelInfo(headerName = "合同金额")
         private String val20;
+        @ExcelInfo(headerName = "是否标准合同")
+        private String val21;
+        @ExcelInfo(headerName = "结算方式")
+        private String val22;
 
         @ExcelInfo(headerName = "甲方")
         private String val100;
