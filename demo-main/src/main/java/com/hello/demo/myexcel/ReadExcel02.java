@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 /**
  * @author: zhaohw
  * @date: 2022.02.09 下午 2:49
+ *根据导出的excel，修改导出新的相对方excel
  */
 public class ReadExcel02 {
     static String TOTAL_PATH = "D:/document/2022-02/合同信息02/合同信息.xlsx";
