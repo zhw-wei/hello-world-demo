@@ -24,17 +24,17 @@ import java.util.stream.Collectors;
  *根据导出的excel，修改导出新的相对方excel
  */
 public class ReadExcel02 {
-    static String TOTAL_PATH = "D:/document/2022-02/合同信息02/合同信息.xlsx";
+    static String TOTAL_PATH = "D:/document/2022-03/中海合同/合同信息.xlsx";
     static int TOTAL_START = 0;
     static int TOTAL_END = 32;
 
-    static String USER_PATH = "D:/document/2022-02/合同信息02/签署方信息.xlsx";
+    static String USER_PATH = "D:/document/2022-03/中海合同/签署方信息.xlsx";
     static int USER_START = 100;
     static int USER_END = 105;
 
-    static String ATTR_PATH = "D:/document/2022-02/合同信息02/合同属性信息.xlsx";
+    static String ATTR_PATH = "D:/document/2022-03/中海合同/合同属性信息.xlsx";
     static int ATTR_START = 201;
-    static int ATTR_END = 221;
+    static int ATTR_END = 222;
 
     private static void objectCopy(List<ContractExcelInfo> toObjectList, List<ContractExcelInfo> fromObjectList,
                                    int startIndex, int endIndex) throws Exception{
@@ -329,5 +329,7 @@ public class ReadExcel02 {
         private String val220;
         @ExcelInfo(headerName = "增值-月租金/月合同额（元）")
         private String val221;
+        @ExcelInfo(headerName = "增值-持续关联交易内容")
+        private String val222;
     }
 }
