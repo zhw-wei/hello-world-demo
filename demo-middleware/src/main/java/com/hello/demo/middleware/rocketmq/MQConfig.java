@@ -6,7 +6,7 @@ package com.hello.demo.middleware.rocketmq;
  */
 public interface MQConfig {
 
-    String MQ_LINUX_PATH="192.168.3.63:9876";
+    String MQ_LINUX_PATH="192.168.3.108:9876";
 
     String MQ_MAC_PATH="192.168.1.118:9876";
 

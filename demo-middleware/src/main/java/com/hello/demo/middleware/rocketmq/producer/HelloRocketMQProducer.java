@@ -20,6 +20,7 @@ public class HelloRocketMQProducer {
         DefaultMQProducer producer = new DefaultMQProducer("producer_group_01");
 
         //注册中心
+        producer.setSendMsgTimeout(6 * 1000);
         producer.setNamesrvAddr(MQConfig.MQ_PATH);
 
         System.out.println("连接开始。。。。。。");
