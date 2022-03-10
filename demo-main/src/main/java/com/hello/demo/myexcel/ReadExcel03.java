@@ -58,7 +58,6 @@ public class ReadExcel03 {
         );
         this.initOrganMap(organMap);
 
-
         System.out.println("-- 查询所有科目表名称");
         String sqlTemp1 = "select subject_id, subject_name, organ_id, " +
                 "concat('map.put(\"', subject_name, '\",', subject_id, ');')" +
@@ -80,6 +79,10 @@ public class ReadExcel03 {
                         .collect(Collectors.joining(",")))
         );
         this.initExtTypeMap(extTypeMap);
+
+        if(organMap.isEmpty() || subjectMap.isEmpty() || extTypeMap.isEmpty()) return;
+
+        System.out.println("=====================================");
 
         //初始化会计科目主键
         int subItemId = 1;
