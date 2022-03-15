@@ -24,15 +24,15 @@ import java.util.stream.Collectors;
  *根据导出的excel，修改导出新的相对方excel
  */
 public class ReadExcel02 {
-    static String TOTAL_PATH = "D:/document/2022-03/中海合同/合同信息.xlsx";
+    static String TOTAL_PATH = "D:/document/2022-03/中海合同2/合同信息.xlsx";
     static int TOTAL_START = 0;
-    static int TOTAL_END = 32;
+    static int TOTAL_END = 33;
 
-    static String USER_PATH = "D:/document/2022-03/中海合同/签署方信息.xlsx";
+    static String USER_PATH = "D:/document/2022-03/中海合同2/签署方信息.xlsx";
     static int USER_START = 100;
     static int USER_END = 105;
 
-    static String ATTR_PATH = "D:/document/2022-03/中海合同/合同属性信息.xlsx";
+    static String ATTR_PATH = "D:/document/2022-03/中海合同2/合同属性信息.xlsx";
     static int ATTR_START = 201;
     static int ATTR_END = 222;
 
@@ -273,6 +273,8 @@ public class ReadExcel02 {
         private String val31;
         @ExcelInfo(headerName = "业务类型")
         private String val32;
+        @ExcelInfo(headerName = "机构类型")
+        private String val33;
 
         @ExcelInfo(headerName = "主体方-甲方")
         private String val100;
