@@ -14,6 +14,8 @@ import java.beans.PropertyDescriptor;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -24,15 +26,16 @@ import java.util.stream.Collectors;
  *根据导出的excel，修改导出新的相对方excel
  */
 public class ReadExcel02 {
-    static String TOTAL_PATH = "D:/document/2022-03/中海合同2/合同信息.xlsx";
+    static String BASE_PATH = "D:/document/2022-03/中海合同3/";
+    static String TOTAL_PATH = BASE_PATH + "合同信息.xlsx";
     static int TOTAL_START = 0;
     static int TOTAL_END = 33;
 
-    static String USER_PATH = "D:/document/2022-03/中海合同2/签署方信息.xlsx";
+    static String USER_PATH = BASE_PATH + "签署方信息.xlsx";
     static int USER_START = 100;
     static int USER_END = 105;
 
-    static String ATTR_PATH = "D:/document/2022-03/中海合同2/合同属性信息.xlsx";
+    static String ATTR_PATH = BASE_PATH + "合同属性信息.xlsx";
     static int ATTR_START = 201;
     static int ATTR_END = 222;
 
@@ -90,7 +93,8 @@ public class ReadExcel02 {
 
         createExcel.createExcel();
 
-        String filePath = String.format("D:/test/demo/%s.xls", SecurityUtils.createNickName());
+        String filePath = String.format(BASE_PATH + "/%s.xls",
+                ZonedDateTime.now().format(DateTimeFormatter.ofPattern("合同信息_yyyyMMddHHmmss")));
         System.out.println("filePath: " + filePath);
         File file = new File(filePath);
         if (!file.getParentFile().exists()) file.getParentFile().mkdirs();
