@@ -16,14 +16,14 @@ import java.util.stream.Collectors;
 public class ReadExcel01 {
 
     private static final int USER_NAME_COL = 10;
-    private static final int ORGAN_NAME_COL = 0;
-    private static final int CONTRACT_CODE_COL = 2;
+    private static final int ORGAN_NAME_COL = 3;
+    private static final int CONTRACT_CODE_COL = 9;
 
     //读取excel并生成update的sql语句
     public static void main(String[] args) throws Exception {
 
         //解析文件放在桌面
-        String fileName = "20220322广州地区合同台账-刷状态";
+        String fileName = "20220331优你家合同数据表";
         String path = String.format("c:/Users/user/Desktop/%s.xlsx", fileName);
 
         main0(path);
@@ -70,9 +70,11 @@ public class ReadExcel01 {
         System.out.println();
 
         //输出未查询到的机构名称
-        String temp = "select * from copm_b.organ where status=1 and name in (%s);";
-        System.out.println(String.format(temp, nullVal.stream().map(name -> String.format("'%s'", name))
-                .collect(Collectors.joining(","))));
+        if(!nullVal.isEmpty()) {
+            String temp = "select * from copm_b.organ where status=1 and name in (%s);";
+            System.out.println(String.format(temp, nullVal.stream().map(name -> String.format("'%s'", name))
+                    .collect(Collectors.joining(","))));
+        }
     }
 
     private static void main1(String path) throws Exception {
