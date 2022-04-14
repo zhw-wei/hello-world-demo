@@ -54,79 +54,7 @@ public class Hello01 {
         return value;
     }
 
-    /**
-     * 给定一个数组和一个目标和，从数组中找两个数字相加等于目标和，输出这两个数字的下标
-     * 限制：数组内容不能重复
-     */
-    @Test
-    @DisplayName("数组-目标和")
-    public void test02() {
 
-        int[] array = {2, 7, 11, 15};
-        int target = 9;
-
-        //实现 1
-        int[] result0 = this.test02_0(array, target);
-        Assertions.assertTrue(result0[0] == 0);
-        Assertions.assertTrue(result0[1] == 1);
-
-        //实现 2
-        int[] result1 = this.test02_1(array, target);
-        Assertions.assertTrue(result1[0] == 0);
-        Assertions.assertTrue(result1[1] == 1);
-
-    }
-
-    private int[] test02_0(int[] array, int target) {
-
-        //创建一个map存储数组值和对应下标
-        //循环map的key
-        //结果：key index, (target-key) index
-
-        //key: value, value: index
-        Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < array.length; i++) map.put(array[i], i);
-
-        int index0 = -1;
-        int index1 = -1;
-
-        for (Integer value : map.keySet()) {
-            int i0 = map.get(value);
-            if (map.containsKey(target - value) && map.get(target - value) != i0) {
-                index0 = i0;
-                index1 = map.get(target - value);
-                break;
-            }
-        }
-
-        //保证结果有序，方便判断
-        return new int[]{Math.min(index0, index1), Math.max(index0, index1)};
-    }
-
-    private int[] test02_1(int[] array, int target) {
-
-        int index0 = -1;
-        int index1 = -1;
-
-        Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < array.length; i++) {
-            int value = array[i];
-
-            int i0 = i;
-
-            if (map.containsKey(target - value)) {
-                index0 = i0;
-                index1 = map.get(target - value);
-                break;
-            }
-
-            //限制：下标结果的顺序是反的，举例：（9-2=7，2在前，7在后），在读取2是，7并不在缓存中
-            //优点：减少一次放入缓存的循环
-            map.put(value, i);
-        }
-
-        return new int[]{Math.min(index0, index1), Math.max(index0, index1)};
-    }
 
     /**
      * 两个链表表示的数相加，这样就可以实现两个很大的数相加了，无需考虑数值 int ，float 的 限制了。
