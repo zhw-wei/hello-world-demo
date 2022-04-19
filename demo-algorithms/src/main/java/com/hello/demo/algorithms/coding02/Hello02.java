@@ -92,7 +92,7 @@ public class Hello02 {
 
     public List<Integer> findDisappearedNumbers(int[] nums) {
         //使用额外空间
-        //根据下标判断是否有值，0表示没有值
+        //根据下标判断是否有值，0表示有值
         int[] nums2 = new int[nums.length];
         for (int i = 0; i < nums.length; i++) nums2[i] = i + 1;
 
