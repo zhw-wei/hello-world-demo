@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 /**
  * 说明： 此文件中的所有排序算法都是生序排序
+ *
  * @author zhw
  * @date 2022/4/21 23:13
  */
@@ -17,12 +18,10 @@ public class Hello10 {
      * 冒泡排序
      */
     @Test
-    @DisplayName("")
+    @DisplayName("冒泡排序")
     public void test01() {
         int[] nums = {0, 1, 6, 2, 7, 3, 9, 4, 10, 5};
-        System.out.println(Arrays.toString(nums));
         this.sort01(nums);
-        System.out.println(Arrays.toString(nums));
     }
 
     private void sort01(int[] nums) {
@@ -42,11 +41,96 @@ public class Hello10 {
         }
     }
 
+    @Test
+    @DisplayName("选择排序")
+    public void test02(){
+        int[] nums = {0, 1, 6, 2, 7, 3, 9, 4, 10, 5};
+        this.sort02(nums);
+    }
+
     /**
      * 选择排序：该算法可以看做冒泡排序的优化
-     *
+     * <p>
      * 1. 找到数组中最大的那个元素
      * 2. 将它和数组中的最后一个元素交换位置
      * 3. 重复步骤2，同时查找最大元素的数组长度逐步减小，最终遍历整个数组
      */
+    private void sort02(int[] nums) {
+        if (nums == null || nums.length <= 1) return;
+
+        int lastIndex = nums.length - 1;
+        while (lastIndex >= 0) {
+            //找到最大值下标
+            int maxIndex = lastIndex;
+            for (int i = 0; i < lastIndex; i++) {
+                if (nums[maxIndex] < nums[i]) maxIndex = i;
+            }
+
+            //最大值放至尾部
+            int temp = nums[maxIndex];
+            nums[maxIndex] = nums[lastIndex];
+            nums[lastIndex] = temp;
+
+            //减少循环长度
+            lastIndex--;
+        }
+    }
+
+    @Test
+    @DisplayName("插入排序")
+    public void test03(){
+        int[] nums = {0, 1, 6, 2, 7, 3, 9, 4, 10, 5};
+        this.sort03(nums);
+    }
+
+    /**
+     * 插入排序
+     * 将有序数组的下一个值和数组比较放入数组
+     * <p>
+     * 对于未排序数据，在已排序序列中从后向前开始扫描，找到相应的位置插入
+     * 为了给要插入的元素腾出空间，我们需要将插入位置之后的已排序元素都向右移动一位
+     */
+    private void sort03(int[] nums) {
+        int endIndex = 0;
+
+        while(endIndex <= nums.length-2) {
+            //有序顺序列下一个值插入到顺序列中
+            int preIndex = endIndex;
+            int nextIndex = preIndex + 1;
+
+            //元素右移，即与前一个值交换位置
+            while(nums[preIndex] > nums[nextIndex] && preIndex >= 0){
+                int temp = nums[preIndex];
+                nums[preIndex] = nums[nextIndex];
+                nums[nextIndex] = temp;
+                preIndex --;
+                nextIndex --;
+            }
+            System.out.println(Arrays.toString(nums));
+
+            //增加循环长度
+            endIndex ++;
+        }
+    }
+
+    @Test
+    @DisplayName("快速排序")
+    public void test04(){
+        int[] nums = {0, 1, 6, 2, 7, 3, 9, 4, 10, 5};
+        this.sort04(nums);
+    }
+
+    /**
+     * 快速排序
+     *
+     * jdk内置排序算法就是快速排序
+     *
+     * 此算法采用分治思想
+     *
+     * 首先任意选取一个数据作为关键数据，我们称为基准数，然后将所有比它小的数都放到它前面，所有比它大的数都放到它后面, 这个过程称为一趟快速排序，也称为分区操作
+     * 然后再按此方法对这两部分数分别进行快速排序，整个排序过程可以递归进行，以此达到这个数据变成有序序列
+     */
+    private void sort04(int[] nums){
+
+    }
 }
