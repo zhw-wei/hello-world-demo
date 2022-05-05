@@ -76,6 +76,10 @@ public class Hello10 {
         }
     }
 
+    /**
+     * jdk使用快速排序、插入排序作为排序算法
+     * 排序数组大于或等于286时使用快速排序，小于286时使用插入排序
+     */
     @Test
     @DisplayName("插入排序")
     public void test03(){
@@ -133,4 +137,55 @@ public class Hello10 {
     private void sort04(int[] nums){
 
     }
+
+    @Test
+    @DisplayName("希尔排序")
+    public void test05(){
+        int[] nums = {0, 1, 6, 2, 7, 3, 9, 4, 10, 5};
+        this.sort05(nums);
+    }
+
+    /**
+     *
+     */
+    private void sort05(int[] nums){
+
+    }
+
+    @Test
+    @DisplayName("归并排序")
+    public void test06(){
+        int[] nums = {0, 1, 6, 2, 7, 3, 9, 4, 10, 5};
+        this.sort06(nums);
+    }
+
+    /**
+     * 对于给定的一组数据，利用递归与分治技术将数据序列划分成为越来越小的半子表，再对半子表排序后，
+     * 再用递归方法将排好序的半子表合并成为越来越大的有序序列
+     */
+    private void sort06(int[] nums){
+
+    }
+
+    @Test
+    @DisplayName("堆排序")
+    public void test07(){
+        int[] nums = {0, 1, 6, 2, 7, 3, 9, 4, 10, 5};
+        this.sort07(nums);
+    }
+
+    /**
+     *
+     * 二叉堆，是一种完全二叉树的结构，同时满足堆的性质：即子节点的键值或索引总是小于（或大于）它的父节点
+     * 在一个二叉堆中，根节点总是最大（或最小）节点，这样的堆我们称之为最大（小）堆
+     *
+     * 堆排序算法就是抓住了这一节点，每次都取堆顶的元素，然后将剩余的元素重新调整为最大（最小）堆，依次类堆，最终得到排序的序列
+     */
+    private void sort07(int[] nums){
+
+    }
+
+    /**
+     * 计数排序、基数排序、桶排序三种排序算法都利用了桶的概念
+     */
 }
