@@ -31,6 +31,9 @@ public class Hello01 {
         Assertions.assertTrue(this.fibonacci(5) == 5);
         Assertions.assertTrue(this.fibonacci(6) == 8);
 
+        Assertions.assertTrue(this.fibonacci2(6) == 8);
+        Assertions.assertTrue(this.fibonacci3(6) == 8);
+
         //打印时间，查看计算耗时
         //如果没有使用缓冲，计算时间会很长
         System.out.println(System.currentTimeMillis());
@@ -55,6 +58,29 @@ public class Hello01 {
     }
 
 
+    //动态规划实现
+    private long fibonacci2(int n){
+        int[] dp = new int[n+1];
+        dp[0] = 0;
+        dp[1] = 1;
+        for(int i=2; i<=n; i++){
+            dp[i] = dp[i-1] + dp[i-2];
+        }
+        return dp[n];
+    }
+
+    //动态规划实现2
+    private long fibonacci3(int n){
+        int result = 0;
+        int prePre = 0;
+        int pre = 1;
+        for(int i=2; i<=n; i++){
+            result = pre + prePre;
+            prePre = pre;
+            pre = result;
+        }
+        return result;
+    }
 
     /**
      * 两个链表表示的数相加，这样就可以实现两个很大的数相加了，无需考虑数值 int ，float 的 限制了。
