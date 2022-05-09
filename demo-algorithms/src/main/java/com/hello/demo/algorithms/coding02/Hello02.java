@@ -59,6 +59,7 @@ public class Hello02 {
     }
 
     //单向循环
+    //类似于冒泡排序
     private void moveZeroes_2(int[] nums) {
         /*
          * index是假设值为0的数字的下标
