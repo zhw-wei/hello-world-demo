@@ -11,10 +11,6 @@
 
     <artifactId>demo-scala</artifactId>
 
-    <properties>
-        <scala.version>2.12.13</scala.version>
-    </properties>
-
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.scala-lang/scala-library -->
         <dependency>
