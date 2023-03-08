@@ -25,7 +25,6 @@
 
     <modules>
         <module>demo-main</module>
-        <module>demo-netty</module>
         <module>demo-jvm</module>
         <module>demo-scala</module>
         <module>demo-javafx</module>
